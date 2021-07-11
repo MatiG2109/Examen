@@ -14,45 +14,43 @@ int main(void) {
   int op;
   p * aux1;
   p * aux2;
-  p * aux3;
+  p * top;
  do{
     printf("1.  Ingresar  persona\n");
     printf("2.  Buscar persona por Nombre\n");
     printf("3.  Buscar persona por Rut\n");
-    printf("4.  Exit\n");
     printf("Escoger una opcion: ");
     scanf("%i", &op);
 
-    if((op > 4) || (op < 1)){
+    if((op > 3) || (op < 1)){
       printf("___________________________________\n\n");
       printf("*Numero invalido, intente nuevamente*\n");
     }
 
-  }while((op > 4) || (op < 1));
+  }while((op > 3) || (op < 1));
 
   switch(op){
 
     case 1:
-    printf("Ingrese Nombre: \n");
-    scanf("%s", aux1->nombre);
+
     printf("Ingrese RUT: \n");
     scanf("%s", aux1->rut);
+    printf("Ingrese Nombre: \n");
+    scanf("%s", aux1->nombre);
     printf("\nIngrese Edad : ");
     scanf("%i", &aux1->edad);
-
-
     aux2=firstList(lista);
     if(aux2 == NULL){
         pushFront(lista, aux1);
       }else{
-        while(aux3!=NULL){
-          if(aux1->edad >= aux3->edad){
-            aux3=nextList(lista);
+        while(top!=NULL){
+          if(aux1->edad >= top->edad){
+            top=nextList(lista);
         }else{
           if(nextList(lista) != NULL){
               aux1 = nextList(lista);
               pushCurrent(lista, aux1);
-              aux3 = aux1;
+              top = aux1;
             }
         }
         }
@@ -60,15 +58,41 @@ int main(void) {
 
     break;
     case 2:
-
-
-
-
+    
+    printf("Ingresar nombre a buscar: \n");
+    char* nombre;
+    scanf("\n%s", nombre);
+    aux1 = firstList(lista);
+    do{
+      if(aux1->nombre==nombre){
+        printf("Nombre \n");
+        printf("%s\n", nombre);
+        printf("Rut \n");
+        printf("%s \n", aux1->rut);
+        printf("Edad \n");
+        printf("%i \n", aux1->edad);
+      }
+      aux1 = nextList(lista);
+    }while(aux1!=NULL);
+    break;
     case 3:
+    printf("Ingresar nombre a buscar: \n");
+    char* rut;
+    scanf("\n%s", rut);
+    aux1 = firstList(lista);
+    do{
+      if(aux1->rut==rut){
+        printf("Nombre \n");
+        printf("%s\n", aux1->nombre);
+        printf("Rut \n");
+        printf("%s \n", rut);
+        printf("Edad \n");
+        printf("%i \n", aux1->edad);
+        
 
-
-
-    case 4:
+      }
+      aux1 = nextList(lista);
+    }while(aux1!=NULL);
     break;
   }
 }
