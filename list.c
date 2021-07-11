@@ -5,8 +5,9 @@
 
 typedef struct Node Node;
 
+
 struct Node {
-    const void * data;
+    p * data;
     Node * next;
     Node * prev;
 };
@@ -17,9 +18,10 @@ struct List {
     Node * current;
 };
 
-typedef List List;
+typedef p p;
 
-Node * createNode(const void * data) {
+
+Node * createNode(p * data) {
     Node * new = (Node *)malloc(sizeof(Node));
     assert(new != NULL);
     new->data = data;
@@ -29,11 +31,10 @@ Node * createNode(const void * data) {
 }
 
 List * createList() {
-  List *Lista=NULL;
-  Lista = (List *) malloc(sizeof(int));
-     return Lista;
+  List * lista = (List *) malloc(sizeof(List));
+  assert(lista != NULL);
+     return lista;
 }
-
 void * firstList(List * list) {
   if(list->head==NULL){ //validacion de el primer elemento de la lista
       return NULL;
@@ -70,7 +71,7 @@ void * prevList(List * list) {
      return (void *)list->current->data;
 }
 
-void pushFront(List * list, const void * data) {
+void pushFront(List * list, p * data) {
    Node* nuevoNodo = createNode(data);
    nuevoNodo->next = list->head;
    list->head=nuevoNodo;
@@ -87,12 +88,12 @@ void pushFront(List * list, const void * data) {
 
 }
 
-void pushBack(List * list, const void * data) {
+void pushBack(List * list, p * data) {
     list->current = list->tail;
     pushCurrent(list,data);
 }
 
-void pushCurrent(List * list, const void * data) {
+void pushCurrent(List * list, p * data) {
   Node* nodoA = createNode(data);
   nodoA->next = list->current;
   list->current=nodoA;

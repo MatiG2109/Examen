@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include "list.h"
 
-typedef struct persona{
+typedef struct p{
 
   char nombre[20];
   char rut[11];
@@ -9,6 +10,7 @@ typedef struct persona{
 }p;
 
 int main(void) {
+  List * lista = createList();
   int op;
   p * aux1;
   p * aux2;
@@ -34,9 +36,28 @@ int main(void) {
     printf("Ingrese Nombre: \n");
     scanf("%s", aux1->nombre);
     printf("Ingrese RUT: \n");
-    scanf("%s", aux2->rut);
+    scanf("%s", aux1->rut);
     printf("\nIngrese Edad : ");
-    scanf("%i", &aux3->edad);
+    scanf("%i", &aux1->edad);
+
+
+    aux2=firstList(lista);
+    if(aux2 == NULL){
+        pushFront(lista, aux1);
+      }else{
+        while(aux3!=NULL){
+          if(aux1->edad >= aux3->edad){
+            aux3=nextList(lista);
+        }else{
+          if(nextList(lista) != NULL){
+              aux1 = nextList(lista);
+              pushCurrent(lista, aux1);
+              aux3 = aux1;
+            }
+        }
+        }
+      }
+
     break;
     case 2:
 
