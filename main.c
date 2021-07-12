@@ -55,9 +55,15 @@ int main() {
         if(aux1->edad >= top->edad){
           top = nextList(lista);
         }else{
+          //Si el siguiente en la lista no es NULL, se almacenara en dondee
          if(nextList(lista) != NULL){
+           //Se usa un aux3 para guardar el siguiente en la lista
+            aux3=nextList(lista);
+           //Guarda la persona en el pushCurrent
             pushCurrent(lista, aux1);
+            //El top continua para ordenar las personas 
             top = nextList(lista);
+            top=aux3;
           
          }else{
            //Si top llega a ser NULL, se ingresa la persona al final de la lista
