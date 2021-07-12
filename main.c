@@ -51,14 +51,16 @@ int main() {
     }else{
     //Si se encuentra alguna persona en la lista, se deberan comparar ambas personas atraves de sus edades para asi poder ordenar por edades.
       while(top != NULL){
+        //Al entrar al ciclo, este preguntara si la edad es mayor o igual al valor donde se encuentra, si es asi se avanza en la lista y se vuelve a preguntar hasta encontrar el sitio donde se guardara a la persona
         if(aux1->edad >= top->edad){
           top = nextList(lista);
         }else{
-          if(nextList(lista) != NULL){
-            aux3 = nextList(lista);
+         if(nextList(lista) != NULL){
             pushCurrent(lista, aux1);
-            top = aux3;
-          }else{
+            top = nextList(lista);
+          
+         }else{
+           //Si top llega a ser NULL, se ingresa la persona al final de la lista
             pushBack(lista, aux1);
            }
          }
