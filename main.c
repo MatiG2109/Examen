@@ -1,30 +1,31 @@
 #include <stdio.h>
 #include "list.h"
 
+//Estructura p que almacena nombre, rut y la edad
 typedef struct p{
 
   char nombre[20];
-  char rut[11];
+  char rut[10];
   int edad;
 
 }p;
 
-int main(void) {
+int main() {
   List * lista = createList();
   int op;
-  p * aux1;
-  p * aux2;
-  p * top;
+  p * aux1;//Nueva Persona
+  p * aux2;//Busqueda
+  p * top; //Recorrido
  do{
+    printf("Escoger una opcion: \n");
     printf("1.  Ingresar  persona\n");
     printf("2.  Buscar persona por Nombre\n");
     printf("3.  Buscar persona por Rut\n");
-    printf("Escoger una opcion: ");
+    
     scanf("%i", &op);
 
     if((op > 3) || (op < 1)){
-      printf("___________________________________\n\n");
-      printf("*Numero invalido, intente nuevamente*\n");
+      printf("Intente nuevamente\n");
     }
 
   }while((op > 3) || (op < 1));
@@ -32,29 +33,32 @@ int main(void) {
   switch(op){
 
     case 1:
-
-    printf("Ingrese RUT: \n");
+    printf("\nIngrese Edad : ");
+    scanf("%i", &aux1->edad);
+    printf("Ingrese RUT con guión: \n");
     scanf("%s", aux1->rut);
     printf("Ingrese Nombre: \n");
     scanf("%s", aux1->nombre);
-    printf("\nIngrese Edad : ");
-    scanf("%i", &aux1->edad);
-    aux2=firstList(lista);
-    if(aux2 == NULL){
-        pushFront(lista, aux1);
-      }else{
-        while(top!=NULL){
-          if(aux1->edad >= top->edad){
-            top=nextList(lista);
+
+    top=firstList(lista);
+    if(top == NULL){
+    pushFront(lista, aux1);
+    }else{
+      while(top != NULL){
+        if(aux1->edad >= top->edad){
+          top = nextList(lista);
         }else{
           if(nextList(lista) != NULL){
-              aux1 = nextList(lista);
-              pushCurrent(lista, aux1);
-              top = aux1;
-            }
-        }
-        }
-      }
+            aux2 = nextList(lista);
+            pushCurrent(lista, aux1);
+            top = aux2;
+          }else{
+            pushBack(lista, aux1);
+           }
+         }
+       }
+     }
+  
 
     break;
     case 2:
